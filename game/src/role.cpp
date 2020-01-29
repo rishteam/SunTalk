@@ -20,11 +20,22 @@ Role::Role(float x, float y, float s){
 
 }
 
-void Role::reset(float x, float y){
+void Role::init(float x, float y, float s){
 	m_x = x;
 	m_y = y;
 	m_status = Status::STOP;
+
+	m_fly_1.loadFromFile("assets/pic/role/fly_1.png");
+	m_fly_2.loadFromFile("assets/pic/role/fly_2.png");
+	m_stop_1.loadFromFile("assets/pic/role/stop_1.png");
+	m_stop_2.loadFromFile("assets/pic/role/stop_2.png");
+	m_down.loadFromFile("assets/pic/role/down.png");
+
+	m_role.setTexture(m_stop_1);
+
 	m_cnt = 0;
+	m_anim = 60;
+	m_speed = s;
 }
 
 void Role::update(sf::RenderWindow &window){
@@ -46,7 +57,11 @@ void Role::update(sf::RenderWindow &window){
 	}
 	m_cnt++;
 	m_cnt%= m_anim;
+
+	if( m_y < 5 ) m_y = 5;
+	if( m_y > 655 ) m_y = 655;
 	m_role.setPosition(m_x,m_y);
+
 }
 
 void Role::draw(sf::RenderWindow &window){

@@ -5,6 +5,7 @@
 #include <button.h>
 #include <role.h>
 #include <pillar.h>
+#include <game.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -27,11 +28,9 @@ int main()
 	Button StartButton(580,335,120,50,S);
 
 	sf::Text H("Home", font, 50);
-	Button HomeButton(30,30,150,50,H);
-	Role Bird(1000,360,0.05);
+	Button HomeButton(30,30,150,50,H); 
 
-	Pillar testUp(500,0,100,300,0.05);
-	Pillar testDown(500,450,100,300,0.05);
+	Game Gametest(WINDOW_WIDTH, WINDOW_HEIGHT, 0.05);
 
 	// Start the game loop
 	while (window.isOpen())
@@ -52,7 +51,7 @@ int main()
 				case sf::Event::MouseButtonPressed:
 					if( GameMode == 0 ){
 						if( StartButton.mouseIn(event.mouseButton.x, event.mouseButton.y) ){
-							Bird.reset(1000, 360);
+							// Bird.init(1000, 360,0.05);
 							GameMode = 1;
 						}
 					}
@@ -74,15 +73,12 @@ int main()
 			StartButton.draw(window);
 		}
 		if( GameMode == 1 ){
+
+			Gametest.update(window);
+			Gametest.draw(window);
+
 			HomeButton.update(window);
 			HomeButton.draw(window);
-			Bird.update(window);
-			Bird.draw(window);
-
-			testUp.update(window);
-			testUp.draw(window);
-			testDown.update(window);
-			testDown.draw(window);
 
 		}
 		window.display();

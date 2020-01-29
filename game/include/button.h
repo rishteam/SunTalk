@@ -7,7 +7,9 @@
 class Button{
 
 public:
+	Button() = default;
 	Button(float x, float y, float w, float h, sf::Text text);
+	void init(float x, float y, float w, float h, sf::Text text);
 	void update(sf::RenderWindow &window);
 	void draw(sf::RenderWindow &window);
 	bool mouseIn(float pos_x, float pos_y);
