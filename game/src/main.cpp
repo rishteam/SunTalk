@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <button.h>
+#include <role.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -24,6 +25,10 @@ int main()
 	sf::Text S("start", font, 50);
 	Button StartButton(580,335,120,50,S);
 
+	sf::Text H("Home", font, 50);
+	Button HomeButton(30,30,150,50,H);
+	Role Bird(1000,360);
+
 	// Start the game loop
 	while (window.isOpen())
 	{
@@ -42,11 +47,15 @@ int main()
 					break;
 				case sf::Event::MouseButtonPressed:
 					if( GameMode == 0 ){
-						if( StartButton.mouseIn(event.mouseButton.x, event.mouseButton.y) )
+						if( StartButton.mouseIn(event.mouseButton.x, event.mouseButton.y) ){
+							Bird.reset(1000, 360);
 							GameMode = 1;
+						}
 					}
-					else
-						GameMode = 0;
+					else if( GameMode == 1 ){
+						if( HomeButton.mouseIn(event.mouseButton.x, event.mouseButton.y) )
+							GameMode = 0;
+					}
 					break;
 				default:
 					break;
@@ -59,6 +68,12 @@ int main()
 			window.draw(text);
 			StartButton.update(window);
 			StartButton.draw(window);
+		}
+		if( GameMode == 1 ){
+			HomeButton.update(window);
+			HomeButton.draw(window);
+			Bird.update(window);
+			Bird.draw(window);
 		}
 		window.display();
 

@@ -16,8 +16,8 @@ S_LIB+=-lopengl32 -lfreetype -lwinmm -lgdi32
 S_LIB+=-lopenal32 -lvorbisenc -lvorbisfile -lvorbis -lFLAC -lm -logg
 LIBS=$(S_LIB)
 
-EXE=example
-SOURCES=main.cpp button.cpp
+EXE=game
+SOURCES=main.cpp button.cpp role.cpp
 
 OBJS=$(addsuffix .o, $(basename $(notdir $(SOURCES))))
 

@@ -1,7 +1,6 @@
 #include <button.h>
 
 Button::Button(float x, float y, float w, float h, sf::Text text){
-	
 	m_x = x;
 	m_y = y;
 	m_w = w;
