@@ -7,7 +7,7 @@ class Role{
 
 public:
 
-	Role(float x, float y);
+	Role(float x, float y, float s);
 	void reset(float x, float y);
 	void update(sf::RenderWindow &window);
 	void draw(sf::RenderWindow &window);

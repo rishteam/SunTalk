@@ -4,6 +4,7 @@
 
 #include <button.h>
 #include <role.h>
+#include <pillar.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -27,7 +28,10 @@ int main()
 
 	sf::Text H("Home", font, 50);
 	Button HomeButton(30,30,150,50,H);
-	Role Bird(1000,360);
+	Role Bird(1000,360,0.05);
+
+	Pillar testUp(500,0,100,300,0.05);
+	Pillar testDown(500,450,100,300,0.05);
 
 	// Start the game loop
 	while (window.isOpen())
@@ -74,6 +78,12 @@ int main()
 			HomeButton.draw(window);
 			Bird.update(window);
 			Bird.draw(window);
+
+			testUp.update(window);
+			testUp.draw(window);
+			testDown.update(window);
+			testDown.draw(window);
+
 		}
 		window.display();
 

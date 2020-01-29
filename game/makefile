@@ -17,7 +17,7 @@ S_LIB+=-lopenal32 -lvorbisenc -lvorbisfile -lvorbis -lFLAC -lm -logg
 LIBS=$(S_LIB)
 
 EXE=game
-SOURCES=main.cpp button.cpp role.cpp
+SOURCES=main.cpp button.cpp role.cpp pillar.cpp
 
 OBJS=$(addsuffix .o, $(basename $(notdir $(SOURCES))))
 

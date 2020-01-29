@@ -1,6 +1,6 @@
 #include <role.h>
 
-Role::Role(float x, float y){
+Role::Role(float x, float y, float s){
 
 	m_x = x;
 	m_y = y;
@@ -16,7 +16,7 @@ Role::Role(float x, float y){
 
 	m_cnt = 0;
 	m_anim = 60;
-	m_speed = 0.05;
+	m_speed = s;
 
 }
 
