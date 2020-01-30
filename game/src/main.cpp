@@ -2,6 +2,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
+#include <background.h>
 #include <button.h>
 #include <role.h>
 #include <pillar.h>
@@ -19,6 +20,8 @@ int main()
 	
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_NAME);
 	window.setFramerateLimit(60);
+
+	Background Bg(10,5);
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/font/arial.ttf"))
@@ -76,6 +79,8 @@ int main()
 
 
 		window.clear();
+		Bg.update(window);
+		Bg.draw(window);
 		switch (GameMode){
 			case 0:
 				window.draw(text);
