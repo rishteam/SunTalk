@@ -9,7 +9,7 @@ Background::Background(float bgs, float fgs){
 	m_bgSprite_2.setTexture(m_bgTexture);
 
 	m_bgSprite_1.setPosition(0,0);
-	m_bgSprite_2.setPosition(1280,0);
+	m_bgSprite_2.setPosition(5120,0);
 //------------------------------------------
 	m_fgSpeed = fgs;
 	m_fgTexture.loadFromFile("assets/pic/background/fg.png");
@@ -17,7 +17,7 @@ Background::Background(float bgs, float fgs){
 	m_fgSprite_1.setTexture(m_fgTexture);
 	m_fgSprite_2.setTexture(m_fgTexture);
 
-	m_fgSprite_1.setPosition(-1280,0);
+	m_fgSprite_1.setPosition(-2560,0);
 	m_fgSprite_2.setPosition(0,0);
 
 }
@@ -30,8 +30,8 @@ void Background::update(sf::RenderWindow &window){
 	posBg1.x -= m_bgSpeed;
 	posBg2.x -= m_bgSpeed;
 
-	if( posBg1.x == 0 ) posBg2.x = 1280;
-	if( posBg2.x == 0 ) posBg1.x = 1280;
+	if( posBg1.x == 0 ) posBg2.x = 5120;
+	if( posBg2.x == 0 ) posBg1.x = 5120;
 
 	m_bgSprite_1.setPosition(posBg1.x,posBg1.y);
 	m_bgSprite_2.setPosition(posBg2.x,posBg2.y);
@@ -42,8 +42,8 @@ void Background::update(sf::RenderWindow &window){
 	posFg1.x += m_fgSpeed;
 	posFg2.x += m_fgSpeed;
 
-	if( posFg1.x == 0 ) posFg2.x = -1280;
-	if( posFg2.x == 0 ) posFg1.x = -1280;
+	if( posFg1.x == 0 ) posFg2.x = -2560;
+	if( posFg2.x == 0 ) posFg1.x = -2560;
 
 	m_fgSprite_1.setPosition(posFg1.x,posFg1.y);
 	m_fgSprite_2.setPosition(posFg2.x,posFg2.y);

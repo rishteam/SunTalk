@@ -21,7 +21,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_NAME);
 	window.setFramerateLimit(60);
 
-	Background Bg(10,5);
+	Background Bg(5,2);
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/font/arial.ttf"))
