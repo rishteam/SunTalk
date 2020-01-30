@@ -13,6 +13,9 @@ public:
 	void draw(sf::RenderWindow &window);
 	bool alive();
 
+	float getX() const { return m_x; }
+	float getY() const { return m_y; }
+
 private:
 
 	float m_x, m_y, m_speed;

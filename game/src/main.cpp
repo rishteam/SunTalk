@@ -9,7 +9,8 @@
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
-#define GAME_NAME "Just a Game"
+#define GAME_SPEED 5
+#define GAME_NAME "Just Fly"
 
 int GameMode = 0;
 
@@ -17,6 +18,7 @@ int main()
 {
 	
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_NAME);
+	window.setFramerateLimit(60);
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/font/arial.ttf"))
@@ -25,12 +27,12 @@ int main()
 	text.setPosition(240,160);
 
 	sf::Text S("start", font, 50);
-	Button StartButton(580,335,120,50,S);
+	Button StartButton(580,350,120,50,S);
 
 	sf::Text H("Home", font, 50);
 	Button HomeButton(30,30,150,50,H); 
 
-	Game Gametest(WINDOW_WIDTH, WINDOW_HEIGHT, 0.05);
+	Game Gametest(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SPEED);
 
 	// Start the game loop
 	while (window.isOpen())
@@ -49,16 +51,6 @@ int main()
 				case sf::Event::EventType::KeyReleased:
 					break;
 				case sf::Event::MouseButtonPressed:
-					if( GameMode == 0 ){
-						if( StartButton.mouseIn(event.mouseButton.x, event.mouseButton.y) ){
-							// Bird.init(1000, 360,0.05);
-							GameMode = 1;
-						}
-					}
-					else if( GameMode == 1 ){
-						if( HomeButton.mouseIn(event.mouseButton.x, event.mouseButton.y) )
-							GameMode = 0;
-					}
 					break;
 				default:
 					break;
@@ -66,19 +58,38 @@ int main()
 
 		}
 
-		window.clear();
-		if( GameMode == 0 ){
-			window.draw(text);
-			StartButton.update(window);
-			StartButton.draw(window);
+		switch (GameMode){
+			case 0:
+				if( StartButton.isClick(window) ){
+					Gametest.restart(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SPEED);
+					GameMode = 1;
+				}
+				break;
+			case 1:
+				if( HomeButton.isClick(window) ){
+					GameMode = 0;
+				}
+				break;
+			default:
+				break;
 		}
-		if( GameMode == 1 ){
 
-			Gametest.update(window);
-			Gametest.draw(window);
 
-			HomeButton.update(window);
-			HomeButton.draw(window);
+		window.clear();
+		switch (GameMode){
+			case 0:
+				window.draw(text);
+				StartButton.update(window);
+				StartButton.draw(window);
+				break;
+			case 1:
+				Gametest.update(window);
+				Gametest.draw(window);
+				HomeButton.update(window);
+				HomeButton.draw(window);
+				break;
+			default:
+				break;
 
 		}
 		window.display();

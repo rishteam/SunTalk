@@ -15,7 +15,7 @@ Role::Role(float x, float y, float s){
 	m_role.setTexture(m_stop_1);
 
 	m_cnt = 0;
-	m_anim = 60;
+	m_anim = 10;
 	m_speed = s;
 
 }
@@ -34,7 +34,7 @@ void Role::init(float x, float y, float s){
 	m_role.setTexture(m_stop_1);
 
 	m_cnt = 0;
-	m_anim = 60;
+	m_anim = 10;
 	m_speed = s;
 }
 

@@ -7,6 +7,7 @@ Game::Game(int w, int h, float s){
 	m_speed = s;
 	m_cnt = 0;
 	m_score = 0;
+	m_lose = false;
 
 	m_font.loadFromFile("assets/font/arial.ttf");
 
@@ -15,6 +16,29 @@ Game::Game(int w, int h, float s){
 	Pillar Up(500,0,100,300,m_speed);
 	Pillar Down(500,450,100,300,m_speed);
 
+	m_PillarTable.clear();
+	m_PillarTable.push_back(Up);
+	m_PillarTable.push_back(Down);
+
+}
+
+void Game::restart(int w, int h, float s){
+
+	m_ww = w;
+	m_wh = h;
+	m_speed = s;
+	m_cnt = 0;
+	m_score = 0;
+	m_lose = false;
+
+	m_font.loadFromFile("assets/font/arial.ttf");
+
+	m_Bird.init((3*m_ww/4),(m_wh/2),m_speed);
+
+	Pillar Up(500,0,100,300,m_speed);
+	Pillar Down(500,450,100,300,m_speed);
+
+	m_PillarTable.clear();
 	m_PillarTable.push_back(Up);
 	m_PillarTable.push_back(Down);
 
@@ -22,11 +46,16 @@ Game::Game(int w, int h, float s){
 
 void Game::addPillar(){
 
-	srand(time(NULL));
-	int high = rand()%((rand()%10+1)*50)+50;
-	printf("%d\n",high);
-	int interval = rand()%((rand()%10+1)*30)+150;
-	int spacing = (rand()%((rand()%10+1)*100))%200-100;
+	std::random_device rd;
+	std::default_random_engine generator(rd());
+	std::uniform_real_distribution<float> unif(0.0,1.0);
+
+	float high = unif(generator)*400+50.0;
+	float interval = unif(generator)*100+150.0;
+	float spacing = unif(generator)*200-100.0;
+	
+	std::cout << high << " " << interval << " " << spacing << std::endl;
+	
 	if( -30 < spacing && spacing < 30 ) spacing = 0;
 	Pillar Up(  -200+spacing,             0, 100, high, m_speed);
 	Pillar Down(-200-spacing, high+interval, 100,  800, m_speed);
@@ -36,8 +65,8 @@ void Game::addPillar(){
 
 }
 
-void Game::update(sf::RenderWindow &window){
-	
+void Game::run(sf::RenderWindow &window){
+
 	m_cnt += m_speed;
 	if( m_cnt > 50 ){
 		m_score++;
@@ -56,8 +85,17 @@ void Game::update(sf::RenderWindow &window){
 	while( m_PillarTable[0].notneed() )
 		m_PillarTable.erase(m_PillarTable.begin(),m_PillarTable.begin()+1);
 
-	// printf("%d\n", m_PillarTable.size());
+	for(auto P : m_PillarTable )
+		if( P.hitby(m_Bird.getX()+50.0,m_Bird.getY()+50.0) )
+			m_lose = true;
+}
+
+void Game::update(sf::RenderWindow &window){
 	
+	if( !m_lose ){
+		run(window);
+	}
+
 }
 
 void Game::draw(sf::RenderWindow &window){

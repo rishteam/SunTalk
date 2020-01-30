@@ -47,9 +47,11 @@ void Button::draw(sf::RenderWindow &window){
 	window.draw(m_text);
 }
 
-bool Button::mouseIn(float pos_x, float pos_y){
+bool Button::isClick(sf::RenderWindow &window){
+	auto pos = sf::Mouse::getPosition(window);
 	float lx = m_x, ly = m_y, rx = m_x+m_w, ry = m_y+m_h;
-	if(lx <= pos_x && pos_x <= rx && ly <= pos_y && pos_y <= ry)
-		return true;
+	if(lx <= pos.x && pos.x <= rx && ly <= pos.y && pos.y <= ry)
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			return true;
 	return false;
 }
