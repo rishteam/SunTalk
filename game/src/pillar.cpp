@@ -11,7 +11,7 @@ void Pillar::init(float x, float y, float w, float h, float s){
 	m_h = h;
 	m_speed = s;
 	
-	m_texture.loadFromFile("assets/pic/pillar.png");
+	m_texture.loadFromFile("assets/pic/other/pillar.png");
 	m_sprite.setTexture(m_texture);
 }
 

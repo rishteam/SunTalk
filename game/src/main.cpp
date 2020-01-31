@@ -24,7 +24,7 @@ int main()
 	Background Bg(5,2);
 
 	sf::Texture TitleTexture;
-	TitleTexture.loadFromFile("assets/pic/title.png");
+	TitleTexture.loadFromFile("assets/pic/other/title.png");
 	sf::Sprite TitleSprite;
 	TitleSprite.setTexture(TitleTexture);
 	TitleSprite.setPosition(340,200);
@@ -70,7 +70,7 @@ int main()
 		switch (GameMode){
 			case 0:
 				if( StartButton.isClick(window) ){
-					Gametest.restart(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SPEED);
+					Gametest.init(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SPEED);
 					GameMode = 1;
 				}
 				break;

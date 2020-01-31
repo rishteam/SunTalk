@@ -17,11 +17,12 @@ class Game{
 public:
 
 	Game(int w, int h, float s);
-	void restart(int w, int h, float s);
+	void init(int w, int h, float s);
 	
 	void ready(sf::RenderWindow &window);
 	void addPillar();
 	void run(sf::RenderWindow &window);
+	void restart(sf::RenderWindow &window);
 
 	void update(sf::RenderWindow &window);
 	void draw(sf::RenderWindow &window);
@@ -41,8 +42,9 @@ private:
 	Role m_Bird;
 	std::vector <Pillar> m_PillarTable;
 
-	sf::Sprite m_readySprite;
+	sf::Sprite m_Sprite;
 	sf::Texture m_readyTexture;
+	sf::Texture m_resetTexture;
 
 	sf::Font m_font;
 	sf::Text m_scoreText;

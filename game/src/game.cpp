@@ -1,10 +1,10 @@
 #include <game.h>
 
 Game::Game(int w, int h, float s){
-	restart(w,h,s);
+	init(w,h,s);
 }
 
-void Game::restart(int w, int h, float s){
+void Game::init(int w, int h, float s){
 
 	m_ww = w;
 	m_wh = h;
@@ -16,6 +16,7 @@ void Game::restart(int w, int h, float s){
 	m_font.loadFromFile("assets/font/arial.ttf");
 	m_scoreText.setFont(m_font);
 	m_scoreText.setPosition(600,30);
+	m_scoreText.setCharacterSize(30);
 	m_scoreText.setString("Score: " + std::to_string(m_score) );
 	m_scoreText.setFillColor(sf::Color(0,0,0));
 
@@ -28,8 +29,8 @@ void Game::restart(int w, int h, float s){
 	m_PillarTable.push_back(Up);
 	m_PillarTable.push_back(Down);
 
-	m_readyTexture.loadFromFile("assets/pic/ready.png");
-
+	m_readyTexture.loadFromFile("assets/pic/other/ready.png");
+	m_resetTexture.loadFromFile("assets/pic/other/reset.png");
 
 }
 
@@ -39,7 +40,7 @@ void Game::ready(sf::RenderWindow &window){
 	for(int i = 0 ; i < m_PillarTable.size() ; i++ )
 		m_PillarTable[i].update(window,false);
 
-	m_readySprite.setTexture(m_readyTexture);
+	m_Sprite.setTexture(m_readyTexture);
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		m_process = Process::PLAY;
 
@@ -73,6 +74,8 @@ void Game::run(sf::RenderWindow &window){
 		m_score++;
 		m_cnt = 0;
 		m_isAdd = true;
+		m_scoreText.setPosition(600,30);
+		m_scoreText.setCharacterSize(30);
 		m_scoreText.setString("Score: " + std::to_string(m_score) );
 	}
 	if( m_score%10 == 0 && m_isAdd ){
@@ -92,6 +95,24 @@ void Game::run(sf::RenderWindow &window){
 			m_process = Process::LOSE;
 }
 
+void Game::restart(sf::RenderWindow &window){
+
+	m_scoreText.setPosition(260,100);
+	m_scoreText.setCharacterSize(120);
+	m_scoreText.setString("You got " + std::to_string(m_score) + " score");
+
+	m_Bird.update(window,false);
+	for(int i = 0 ; i < m_PillarTable.size() ; i++ )
+		m_PillarTable[i].update(window,false);
+
+	m_Sprite.setTexture(m_resetTexture);
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+		init(m_ww, m_wh, m_speed);
+		m_process = Process::READY;
+	}
+
+}
+
 void Game::update(sf::RenderWindow &window){
 	
 	switch (m_process){
@@ -102,6 +123,7 @@ void Game::update(sf::RenderWindow &window){
 			run(window);
 			break;
 		case Process::LOSE:
+			restart(window);
 			break;
 		default:
 			break;
@@ -117,12 +139,14 @@ void Game::draw(sf::RenderWindow &window){
 
 	switch (m_process){
 		case Process::READY:
-			window.draw(m_readySprite);
+			window.draw(m_Sprite);
 			break;
 		case Process::PLAY:
 			window.draw(m_scoreText);
 			break;
 		case Process::LOSE:
+			window.draw(m_Sprite);
+			window.draw(m_scoreText);
 			break;
 		default:
 			break;
