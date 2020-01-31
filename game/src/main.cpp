@@ -23,17 +23,23 @@ int main()
 
 	Background Bg(5,2);
 
-	sf::Font font;
-	if (!font.loadFromFile("assets/font/arial.ttf"))
-		return EXIT_FAILURE;
-	sf::Text text(GAME_NAME, font, 150);
-	text.setPosition(240,160);
+	sf::Texture TitleTexture;
+	TitleTexture.loadFromFile("assets/pic/title.png");
+	sf::Sprite TitleSprite;
+	TitleSprite.setTexture(TitleTexture);
+	TitleSprite.setPosition(340,200);
 
-	sf::Text S("start", font, 50);
-	Button StartButton(580,350,120,50,S);
+	sf::Texture Stexture1;
+	Stexture1.loadFromFile("assets/pic/button/start_1.png");
+	sf::Texture Stexture2;
+	Stexture2.loadFromFile("assets/pic/button/start_2.png");
+	Button StartButton(580,400,120,50,Stexture1,Stexture2);
 
-	sf::Text H("Home", font, 50);
-	Button HomeButton(30,30,150,50,H); 
+	sf::Texture Htexture1;
+	Htexture1.loadFromFile("assets/pic/button/home_1.png");
+	sf::Texture Htexture2;
+	Htexture2.loadFromFile("assets/pic/button/home_2.png");
+	Button HomeButton(30,30,120,50,Htexture1,Htexture2); 
 
 	Game Gametest(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_SPEED);
 
@@ -83,7 +89,7 @@ int main()
 		Bg.draw(window);
 		switch (GameMode){
 			case 0:
-				window.draw(text);
+				window.draw(TitleSprite);
 				StartButton.update(window);
 				StartButton.draw(window);
 				break;

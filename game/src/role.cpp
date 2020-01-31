@@ -1,34 +1,16 @@
 #include <role.h>
 
 Role::Role(float x, float y, float s){
-
-	m_x = x;
-	m_y = y;
-	m_status = Status::STOP;
-
-	m_fly_1.loadFromFile("assets/pic/role/fly_1.png");
-	m_fly_2.loadFromFile("assets/pic/role/fly_2.png");
-	// m_stop_1.loadFromFile("assets/pic/role/stop_1.png");
-	// m_stop_2.loadFromFile("assets/pic/role/stop_2.png");
-	m_down.loadFromFile("assets/pic/role/down.png");
-
-	m_role.setTexture(m_down);
-
-	m_cnt = 0;
-	m_anim = 10;
-	m_speed = s;
-
+	init(x, y, s);
 }
 
 void Role::init(float x, float y, float s){
 	m_x = x;
 	m_y = y;
-	m_status = Status::STOP;
+	m_status = Status::DOWN;
 
 	m_fly_1.loadFromFile("assets/pic/role/fly_1.png");
 	m_fly_2.loadFromFile("assets/pic/role/fly_2.png");
-	// m_stop_1.loadFromFile("assets/pic/role/stop_1.png");
-	// m_stop_2.loadFromFile("assets/pic/role/stop_2.png");
 	m_down.loadFromFile("assets/pic/role/down.png");
 
 	m_role.setTexture(m_down);
@@ -45,11 +27,6 @@ void Role::update(sf::RenderWindow &window){
 		else m_role.setTexture(m_fly_2);
 		m_y -= m_speed;
 	}
-	// else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-	// 	m_status = Status::STOP;
-	// 	if( m_cnt < m_anim/2 ) m_role.setTexture(m_stop_1);
-	// 	else m_role.setTexture(m_stop_2);
-	// }
 	else{
 		m_status = Status::DOWN;
 		m_role.setTexture(m_down);

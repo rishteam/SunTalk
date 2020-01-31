@@ -1,25 +1,7 @@
 #include <game.h>
 
 Game::Game(int w, int h, float s){
-
-	m_ww = w;
-	m_wh = h;
-	m_speed = s;
-	m_cnt = 0;
-	m_score = 0;
-	m_lose = false;
-
-	m_font.loadFromFile("assets/font/arial.ttf");
-
-	m_Bird.init((3*m_ww/4),(m_wh/2),m_speed);
-
-	Pillar Up(500,0,100,300,m_speed);
-	Pillar Down(500,450,100,300,m_speed);
-
-	m_PillarTable.clear();
-	m_PillarTable.push_back(Up);
-	m_PillarTable.push_back(Down);
-
+	restart(w,h,s);
 }
 
 void Game::restart(int w, int h, float s){
@@ -29,18 +11,26 @@ void Game::restart(int w, int h, float s){
 	m_speed = s;
 	m_cnt = 0;
 	m_score = 0;
-	m_lose = false;
+	m_process = Process::PLAY;
 
 	m_font.loadFromFile("assets/font/arial.ttf");
+	m_scoreText.setFont(m_font);
+	m_scoreText.setPosition(600,30);
+	m_scoreText.setString("Score: " + std::to_string(m_score) );
+	m_scoreText.setFillColor(sf::Color(0,0,0));
 
 	m_Bird.init((3*m_ww/4),(m_wh/2),m_speed);
 
-	Pillar Up(500,0,100,300,m_speed);
-	Pillar Down(500,450,100,300,m_speed);
+	Pillar Up(  500,-500, 100, 800, m_speed);
+	Pillar Down(500, 450, 100, 800, m_speed);
 
 	m_PillarTable.clear();
 	m_PillarTable.push_back(Up);
 	m_PillarTable.push_back(Down);
+
+}
+
+void Game::countdown(sf::RenderWindow &window){
 
 }
 
@@ -57,7 +47,7 @@ void Game::addPillar(){
 	std::cout << high << " " << interval << " " << spacing << std::endl;
 	
 	if( -30 < spacing && spacing < 30 ) spacing = 0;
-	Pillar Up(  -200+spacing,             0, 100, high, m_speed);
+	Pillar Up(  -200+spacing,      high-800, 100,  800, m_speed);
 	Pillar Down(-200-spacing, high+interval, 100,  800, m_speed);
 
 	m_PillarTable.push_back(Up);
@@ -72,6 +62,7 @@ void Game::run(sf::RenderWindow &window){
 		m_score++;
 		m_cnt = 0;
 		m_isAdd = true;
+		m_scoreText.setString("Score: " + std::to_string(m_score) );
 	}
 	if( m_score%10 == 0 && m_isAdd ){
 		m_isAdd = false;
@@ -87,19 +78,41 @@ void Game::run(sf::RenderWindow &window){
 
 	for(auto P : m_PillarTable )
 		if( P.hitby(m_Bird.getX()+50.0,m_Bird.getY()+50.0) )
-			m_lose = true;
+			m_process = Process::LOSE;
 }
 
 void Game::update(sf::RenderWindow &window){
 	
-	if( !m_lose ){
-		run(window);
+	switch (m_process){
+		case Process::COUNT:
+			break;
+		case Process::PLAY:
+			run(window);
+			break;
+		case Process::LOSE:
+			break;
+		default:
+			break;
 	}
 
 }
 
 void Game::draw(sf::RenderWindow &window){
-	m_Bird.draw(window);
+
 	for(auto P : m_PillarTable)
 		P.draw(window);
+	m_Bird.draw(window);
+
+	switch (m_process){
+		case Process::COUNT:
+			break;
+		case Process::PLAY:
+			window.draw(m_scoreText);
+			break;
+		case Process::LOSE:
+			break;
+		default:
+			break;
+	}
+
 }

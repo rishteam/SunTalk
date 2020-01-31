@@ -18,6 +18,7 @@ public:
 private:
 	float m_x, m_y, m_w, m_h;
 	float m_speed;
-	sf::RectangleShape m_rect;
+	sf::Texture m_texture;
+	sf::Sprite m_sprite;
 
 };
