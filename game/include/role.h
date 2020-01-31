@@ -9,7 +9,7 @@ public:
 	Role() = default;
 	Role(float x, float y, float s);
 	void init(float x, float y, float s);
-	void update(sf::RenderWindow &window);
+	void update(sf::RenderWindow &window, bool move = true);
 	void draw(sf::RenderWindow &window);
 	bool alive();
 

@@ -14,13 +14,17 @@ void Role::init(float x, float y, float s){
 	m_down.loadFromFile("assets/pic/role/down.png");
 
 	m_role.setTexture(m_down);
+	m_role.setPosition(m_x,m_y);
 
 	m_cnt = 0;
 	m_anim = 10;
 	m_speed = s;
 }
 
-void Role::update(sf::RenderWindow &window){
+void Role::update(sf::RenderWindow &window, bool move){
+
+	if( !move ) return;
+
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
 		m_status = Status::FLY;
 		if( m_cnt < m_anim/2 ) m_role.setTexture(m_fly_1);

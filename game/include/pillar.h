@@ -9,7 +9,7 @@ public:
 	Pillar() = default;
 	Pillar(float x, float y, float w, float h, float s);
 	void init(float x, float y, float w, float h, float s);
-	void update(sf::RenderWindow &window);
+	void update(sf::RenderWindow &window, bool move = true);
 	void draw(sf::RenderWindow &window);
 	bool hitby(float x, float y);
 

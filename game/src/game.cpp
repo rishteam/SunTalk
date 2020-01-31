@@ -11,7 +11,7 @@ void Game::restart(int w, int h, float s){
 	m_speed = s;
 	m_cnt = 0;
 	m_score = 0;
-	m_process = Process::PLAY;
+	m_process = Process::READY;
 
 	m_font.loadFromFile("assets/font/arial.ttf");
 	m_scoreText.setFont(m_font);
@@ -28,9 +28,20 @@ void Game::restart(int w, int h, float s){
 	m_PillarTable.push_back(Up);
 	m_PillarTable.push_back(Down);
 
+	m_readyTexture.loadFromFile("assets/pic/ready.png");
+
+
 }
 
-void Game::countdown(sf::RenderWindow &window){
+void Game::ready(sf::RenderWindow &window){
+
+	m_Bird.update(window,false);
+	for(int i = 0 ; i < m_PillarTable.size() ; i++ )
+		m_PillarTable[i].update(window,false);
+
+	m_readySprite.setTexture(m_readyTexture);
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		m_process = Process::PLAY;
 
 }
 
@@ -84,7 +95,8 @@ void Game::run(sf::RenderWindow &window){
 void Game::update(sf::RenderWindow &window){
 	
 	switch (m_process){
-		case Process::COUNT:
+		case Process::READY:
+			ready(window);
 			break;
 		case Process::PLAY:
 			run(window);
@@ -104,7 +116,8 @@ void Game::draw(sf::RenderWindow &window){
 	m_Bird.draw(window);
 
 	switch (m_process){
-		case Process::COUNT:
+		case Process::READY:
+			window.draw(m_readySprite);
 			break;
 		case Process::PLAY:
 			window.draw(m_scoreText);

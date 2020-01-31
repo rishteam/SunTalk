@@ -19,7 +19,7 @@ public:
 	Game(int w, int h, float s);
 	void restart(int w, int h, float s);
 	
-	void countdown(sf::RenderWindow &window);
+	void ready(sf::RenderWindow &window);
 	void addPillar();
 	void run(sf::RenderWindow &window);
 
@@ -33,7 +33,7 @@ private:
 	bool m_isAdd = true;
 
 	enum class Process{
-		COUNT,
+		READY,
 		PLAY,
 		LOSE
 	}m_process;
@@ -41,10 +41,8 @@ private:
 	Role m_Bird;
 	std::vector <Pillar> m_PillarTable;
 
-	// sf::Sprite m_countNum;
-	// sf::Texture m_Numone;
-	// sf::Texture m_Numtwo;
-	// sf::Texture m_NumThree;
+	sf::Sprite m_readySprite;
+	sf::Texture m_readyTexture;
 
 	sf::Font m_font;
 	sf::Text m_scoreText;

@@ -15,8 +15,8 @@ void Pillar::init(float x, float y, float w, float h, float s){
 	m_sprite.setTexture(m_texture);
 }
 
-void Pillar::update(sf::RenderWindow &window){
-	m_x += m_speed;
+void Pillar::update(sf::RenderWindow &window, bool move){
+	if(move) m_x += m_speed;
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition({m_x, m_y});
 }
