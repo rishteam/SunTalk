@@ -1,0 +1,3 @@
+C:/Users/SunTalk/Desktop/SunTalk/game/build/CMakeFiles/rebuild_cache.dir
+C:/Users/SunTalk/Desktop/SunTalk/game/build/CMakeFiles/BirdGame.dir
+C:/Users/SunTalk/Desktop/SunTalk/game/build/CMakeFiles/edit_cache.dir
