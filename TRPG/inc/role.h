@@ -11,7 +11,9 @@ public:
     Role(float x, float y);
     
     void init(float x, float y);
+    void setPos(float x, float y);
     float getX();
+    float getY();
     void update();
     void draw(sf::RenderWindow &window);
 

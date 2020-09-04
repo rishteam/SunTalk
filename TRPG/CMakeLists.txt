@@ -17,7 +17,13 @@ add_executable(TRPG
     inc/role.h
     inc/obj.h
     inc/map.h
-    inc/TheRoom.h
+    inc/definition.h
+    inc/MapStartRoom.h
+    inc/MapBookRoom.h
+    inc/MapKitchen.h
+    inc/MapSlaveRoom.h
+    inc/MapAuditorium.h
+    inc/gameloop.h
     src/role.cpp
     src/obj.cpp
     src/map.cpp

@@ -32,8 +32,17 @@ void Role::update(){
 
 }
 
+void Role::setPos(float x, float y){
+    m_x = x;
+    m_y = y;
+}
+
 float Role::getX(){
     return m_x;
+}
+
+float Role::getY(){
+    return m_y;
 }
 
 void Role::draw(sf::RenderWindow &window){

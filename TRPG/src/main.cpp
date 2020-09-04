@@ -13,7 +13,7 @@
 
 #include <role.h>
 #include <map.h>
-#include <TheRoom.h>
+#include <gameloop.h>
 
 int main()
 {
@@ -24,15 +24,6 @@ int main()
 	window.setVerticalSyncEnabled(true);
 	ImGui::SFML::Init(window);
 	sf::Clock deltaClock;
-
-	Role Yukino(740,300);
-
-	Map M;
-	SetupTheRoom(M);
-
-	sf::View view;
-	float viewX = 0;
-	float viewY = 0;
 
 	// Start the game loop
 	while (window.isOpen())
@@ -69,7 +60,7 @@ int main()
 			viewX = Yukino.getX() - 80;
 		}
 
-		RunTheRoom(window, M, Yukino);
+		gameloop(window, M, Yukino);
 
 		view.reset(sf::FloatRect(viewX, viewY, WINDOW_WIDTH, WINDOW_HEIGHT));
 		window.setView(view);
