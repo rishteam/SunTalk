@@ -23,6 +23,7 @@ int Map::click(sf::RenderWindow &window){
 
         // printf("%d ",M.x);
         M.x += int(X.x)-640;
+        M.y += int(X.y)-360;
         // printf("%d\n",M.x);
         
         for(int i = 0 ; i < m_obj.size() ; i++ ){
@@ -33,4 +34,9 @@ int Map::click(sf::RenderWindow &window){
     }
 
     return -1;
+}
+
+void Map::showIT(int k){
+    if( k < m_obj.size() )
+        m_obj[k].showIT();
 }

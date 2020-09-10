@@ -10,7 +10,10 @@ void SetupAuditorium(Map &M, Role &role){
     M.init();
     Object ObjAuditorium(0, 100, "bigirongate");
     M.increase(ObjAuditorium);
+    
     role.setPos(80, 300);
+    viewX = 0;
+    viewY = 0;
 
 }
 

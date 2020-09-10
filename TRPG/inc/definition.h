@@ -31,3 +31,9 @@ bool Kitchendata = false;
 bool SlaveRoomdata = false;
 bool Auditoriumdata = false;
 // End Start Room 
+
+// SlaveRoom
+bool DeadBody = false;
+bool BodyPaperObserved = false;
+bool BodyPaperSuccesObs = false;
+// End SlaveRoom

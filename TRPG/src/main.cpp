@@ -8,7 +8,6 @@
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
-#define GAME_SPEED 5
 #define GAME_NAME "TRPG"
 
 #include <role.h>
@@ -33,32 +32,27 @@ int main()
 		while (window.pollEvent(event)){
 
 			ImGui::SFML::ProcessEvent(event);
-			
 			switch (event.type){
 				case sf::Event::Closed:
 					window.close();
 					break;
-				case sf::Event::EventType::KeyPressed:
-					break;
-				case sf::Event::EventType::KeyReleased:
-					break;
-				case sf::Event::MouseButtonPressed:
-					break;
 				default:
 					break;
 			}
+
 		}
 
 		ImGui::SFML::Update(window, deltaClock.restart());
 
 		Yukino.update();
 
-		if( Yukino.getX() - viewX > 1000 ){
-			viewX = Yukino.getX() - 1000;
+		if( Yukino.getX() - viewX > 700 ){
+			viewX = Yukino.getX() - 700;
 		}
 		else if ( Yukino.getX() - viewX < 80 ){
 			viewX = Yukino.getX() - 80;
 		}
+		viewY = Yukino.getY() - 300;
 
 		gameloop(window, M, Yukino);
 

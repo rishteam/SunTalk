@@ -31,13 +31,15 @@ void SetupStartRoom(Map &M, Role &role){
     role.setPos(740, 300);
     viewX = 0;
     viewY = 0;
+
 }
 
 void RunStartRoom(sf::RenderWindow &window, Map &M, Role &role){
 
-    switch (M.click(window)){
+    switch( M.click(window) ) {
         case 0:
             Lampdata = true;
+            break;
         case 2:
             Soupdata = true;
             break;
@@ -62,5 +64,5 @@ void RunStartRoom(sf::RenderWindow &window, Map &M, Role &role){
         default:
             break;
     }
-
+    
 }

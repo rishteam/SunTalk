@@ -17,6 +17,8 @@ add_executable(TRPG
     inc/role.h
     inc/obj.h
     inc/map.h
+    inc/bag.h
+    inc/log.h
     inc/definition.h
     inc/MapStartRoom.h
     inc/MapBookRoom.h
@@ -29,6 +31,7 @@ add_executable(TRPG
     src/map.cpp
 	src/main.cpp
 )
+
 target_include_directories(TRPG PRIVATE "inc")
 target_link_libraries(TRPG 
 	ImGui-SFML::ImGui-SFML

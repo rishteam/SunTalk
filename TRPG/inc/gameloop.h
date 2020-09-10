@@ -2,6 +2,7 @@
 
 #include <definition.h>
 #include <bag.h>
+#include <log.h>
 
 #include <MapStartRoom.h>
 #include <MapBookRoom.h>
@@ -11,7 +12,10 @@
 
 void gameloop(sf::RenderWindow &window, Map &M, Role &role){
 
-    ImguiBag();
+    ImguiBag(role);
+    ImguiLog();
+    role.ImguiData();
+
     switch( NOWPOS ){
         case Locate::STARTROOM :
             if( LocateChange ){

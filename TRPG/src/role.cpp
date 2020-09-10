@@ -14,12 +14,12 @@ void Role::init(float x, float y){
 void Role::update(){
     
     float x = 0, y = 0;
-    // if( sf::Keyboard::isKeyPressed(sf::Keyboard::W) ){
-    //     y -= 5;
-    // }
-    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-    //     y += 5;
-    // }
+    if( sf::Keyboard::isKeyPressed(sf::Keyboard::W) ){
+        y -= 5;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+        y += 5;
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         x -= 5;
     }
@@ -51,4 +51,43 @@ void Role::draw(sf::RenderWindow &window){
     m_sprite.setPosition({m_x, m_y});
     window.draw(m_sprite);
 
+}
+
+void Role::ImguiData(){
+    
+    srand(time(NULL));
+    int mmin = 1;
+    int mmax = 100;
+    int DICE;
+
+    ImGui::Begin("RoleData");
+    if ( ImGui::Button("Observed") ){
+        DICE = rand()%(mmax-mmin+1)+mmin;
+        if( DICE <= m_observedData ){
+            m_observed = true;
+        }
+    }
+    ImGui::End();
+
+}
+
+bool Role::SuccessObserved(){
+    if( m_observed ){
+        m_observed = false;
+        return true;
+    }
+    return false;
+}
+
+bool Role::ObservedtoObj(){
+    srand(time(NULL));
+    int mmin = 1;
+    int mmax = 100;
+    int DICE;
+
+    DICE = rand() % (mmax - mmin + 1) + mmin;
+    if (DICE <= m_observedData){
+        return true;
+    }
+    return false;
 }

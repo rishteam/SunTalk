@@ -17,6 +17,8 @@ public:
     void draw(sf::RenderWindow &window);
     int click(sf::RenderWindow &window);
 
+    void showIT(int k);
+
 private:
     std::vector <Object> m_obj;
 
