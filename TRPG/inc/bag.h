@@ -38,6 +38,32 @@ void ImguiBag(Role &role){
             ImGui::TreePop();
         }
     }
+    if( BookCase && !DreamBook ){
+        if ( ImGui::TreeNode("BookCase") ){
+            if (ImGui::Button("Observed")){
+                DreamBook = role.ObservedtoObj();
+                BookCase = false;
+            }
+            ImGui::TreePop();
+        }
+    }
+    if( DreamBook ){
+        if( ImGui::TreeNode("DreamBook") ){
+            ImGui::Text("StartRoom :");
+            ImGui::Text("can't leave if I don't finish drinking the soup");
+            ImGui::Text("BookRoom :");
+            ImGui::Text("books are very important so you can't take them oout, but the candles are okay");
+            ImGui::Text("Kitchen :");
+            ImGui::Text("there are a lot of seasonings and utensils, and some prepared soup is in the pot.");
+            ImGui::Text("SlaveRoom :");
+            ImGui::Text("a good girl is waiting for you she hase good thins in her hands");
+            ImGui::Text("Auditorium");
+            ImGui::Text("the god is sleeping here, with information about poison, the guard will not disappear without eating living things.");
+            ImGui::Text("The most important thing");
+            ImGui::Text("please drink with the consciousness of death");
+            ImGui::TreePop();
+        }
+    }
     if( DeadBody ){
         if( ImGui::Button("Reset BodyPaper") ){
             BodyPaperObserved = false;
@@ -68,7 +94,7 @@ void ImguiBag(Role &role){
 
 
             ImGui::TreePop();
-        } 
+        }
     }
     ImGui::End();
 

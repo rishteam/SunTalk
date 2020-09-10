@@ -34,7 +34,7 @@ private:
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
 
-    int m_observedData = 80;
+    int m_observedData = 50;
     bool m_observed = false;
 
 };

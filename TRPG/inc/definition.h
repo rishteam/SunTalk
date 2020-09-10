@@ -17,7 +17,7 @@ enum class Locate{
     KITCHEN,
     SLAVEROOM,
     AUDITORIUM
-} NOWPOS;
+} NOWPOS = Locate::BOOKROOM;
 
 bool LocateChange = true;
 
@@ -37,3 +37,8 @@ bool DeadBody = false;
 bool BodyPaperObserved = false;
 bool BodyPaperSuccesObs = false;
 // End SlaveRoom
+
+// BookRoom
+bool BookCase = false;
+bool DreamBook = false;
+// End BookRoom
